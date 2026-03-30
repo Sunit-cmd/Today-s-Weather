@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+:root{
+    --background-color:rgb(155, 178, 241);
+}
+.navbar{
+    background-color: rgb(250, 185, 101);
+    padding: 0;
+}
+
+.navbar ul {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    background-color: var(--background-color); /
+}
+
+.navbar li {
+    float: right; 
+}
+
+.navbar li a {
+    display: block; 
+    color: white; 
+    text-align: center;
+    padding: 14px 16px; 
+    text-decoration: none; 
+}
+
+.navbar li a:hover {
+    background-color: #ddd; 
+    color: black;
+}
+
+
+.navbar li a.active {
+    background-color: var(--background-color); 
+    color: white;
+}
+.navbar li a.active:hover {
+    background-color: #ddd;
+    color: black; 
+}
+.container{
+    height: 100vh;
+    width: 100%;
+    background-image: url(https://images.pexels.com/photos/45229/drop-of-water-inject-water-drip-45229.jpeg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.grid{
+   
+  display: grid;
+  grid-template-columns: repeat(2, 220px); 
+  gap: 100px;
+  justify-content: center;
+  place-items: center;
+  justify-items: center;
+
+}
+.box {
+  width: 220px;
+  height: 280px; 
+  
+  background: #82d4f3;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  border-radius: 10px;
+}
+
+
