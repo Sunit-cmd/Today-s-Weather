@@ -69,14 +69,28 @@
 .box {
   width: 220px;
   height: 280px; 
-  
-  background: #82d4f3;
+  background: #82d4f3; /* default */
   color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  border-radius: 10px;
+  font-size: 20px;
+  border-radius: 15px;
+  text-align: center;
+  transition: background 0.5s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  padding: 10px;
 }
-
+.box h3 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+.box img {
+  width: 64px;
+  height: 64px;
+}
+.box p {
+  margin: 5px 0;
+}
 
