@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li class="logo"><a href="index.html">🌤️ Today's Weather</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="container" id="weatherContainer">
+            <div class="search-container">
+                <input type="text" id="citySearch" placeholder="Search another city...">
+                <button id="searchBtn">🔍</button>
+            </div>
+            
+            <div class="weather-detail-box" id="detailBox">
+                <h2 id="wCity">Loading...</h2>
+                <img id="wIcon" src="" alt="" style="display:none;">
+                <h1 id="wTemp"></h1>
+                <p id="wCondition" style="font-size: 24px; margin-bottom: 20px;"></p>
+                <div class="extra-details">
+                    <p id="wHumidity"></p>
+                    <p id="wWind"></p>
+                </div>
+            </div>
+            
+            <div class="forecast-container" id="forecastBox">
+                <div class="forecast-item" id="fc-0">
+                    <p><strong class="fc-date"></strong></p>
+                    <img class="fc-icon" src="" alt="" style="display:none;">
+                    <p class="fc-temps"></p>
+                    <p class="fc-cond" style="font-size: 12px;"></p>
+                </div>
+                <div class="forecast-item" id="fc-1">
+                    <p><strong class="fc-date"></strong></p>
+                    <img class="fc-icon" src="" alt="" style="display:none;">
+                    <p class="fc-temps"></p>
+                    <p class="fc-cond" style="font-size: 12px;"></p>
+                </div>
+                <div class="forecast-item" id="fc-2">
+                    <p><strong class="fc-date"></strong></p>
+                    <img class="fc-icon" src="" alt="" style="display:none;">
+                    <p class="fc-temps"></p>
+                    <p class="fc-cond" style="font-size: 12px;"></p>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+    <script src="weather.js"></script>
+</body>
+</html>
