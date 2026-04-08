@@ -91,4 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    const contactForm = document.getElementById('fakeContactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = contactForm.querySelector('input[type="text"]').value;
+            alert(`Thanks for reaching out, ${name}! Your message has been "sent" successfully.`);
+            contactForm.reset();
+        });
+    }
 });
