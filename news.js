@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function fetchNews(apiKey) {
         if (!apiKey) {
-            showError('API Key not found in .env file. Please ensure .env is valid and accessible.');
+            showError('API Key not found. Please ensure your key is correctly configured in config.js or added as a Vercel environment variable.');
+            console.error('API Key missing. Check config.js and .env (local only).');
             return;
         }
 
@@ -40,17 +41,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=en&token=${apiKey}`;
 
         try {
+            console.log('Attempting to fetch news from GNews...');
             const response = await fetch(url);
-            const data = await response.json();
-
+            
             if (!response.ok) {
-                throw new Error(data.errors ? data.errors[0] : 'Failed to fetch news');
+                const data = await response.json();
+                const errorMessageText = data.errors ? data.errors[0] : `HTTP Error ${response.status}: ${response.statusText}`;
+                throw new Error(errorMessageText);
             }
 
+            const data = await response.json();
             displayNews(data.articles);
         } catch (error) {
-            console.error('Error fetching news:', error);
-            showError('Unable to load news. Please check your API key and connection.');
+            console.error('Fetch error:', error);
+            // Show the actual error message to the user for better debugging
+            showError(`Unable to load news: ${error.message}`);
         } finally {
             newsLoader.style.display = 'none';
         }
