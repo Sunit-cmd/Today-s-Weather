@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = 'ff946d71bdab40cea1042151261603';
+    // 1. Get API Key from global config fallback
+    const apiKey = (window.APP_CONFIG && window.APP_CONFIG.WEATHER_API_KEY) ? window.APP_CONFIG.WEATHER_API_KEY : 'ff946d71bdab40cea1042151261603';
+
     const searchBtn = document.getElementById('searchBtn');
     if (searchBtn) {
         searchBtn.addEventListener('click', () => {
@@ -18,8 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=5`)
-        .then(response => response.json())
+    fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(city)}&days=5`)
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errData => {
+                    throw new Error(errData.error ? errData.error.message : `HTTP ${response.status}`);
+                });
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.error) {
                 document.getElementById('wCity').innerText = `Error: ${data.error.message}`;

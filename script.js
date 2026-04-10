@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = 'ff946d71bdab40cea1042151261603';
+    // 1. Get API Key from global config fallback
+    const apiKey = (window.APP_CONFIG && window.APP_CONFIG.WEATHER_API_KEY) ? window.APP_CONFIG.WEATHER_API_KEY : 'ff946d71bdab40cea1042151261603';
+    
     const cities = [
         { name: 'New Delhi', id: 'box1' },
         { name: 'New York', id: 'box2' },
@@ -8,8 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const fetchWeatherForBox = (cityName, boxId) => {
-        fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${cityName}`)
-            .then(response => response.json())
+        if (!cityName) return;
+        fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(cityName)}`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errData => {
+                        throw new Error(errData.error ? errData.error.message : `HTTP ${response.status}`);
+                    });
+                }
+                return response.json();
+            })
             .then(data => {
                 const box = document.getElementById(boxId);
                 if (!box) return;
@@ -18,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     box.innerHTML = `<h3>Error</h3><p>${data.error.message}</p>`;
                     return;
                 }
-
+                // ... (rest of the display logic remains same)
                 const temp = data.current.temp_c;
                 const condition = data.current.condition.text;
                 const icon = data.current.condition.icon;
@@ -75,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error(`Error fetching weather for ${cityName}:`, error);
                 const box = document.getElementById(boxId);
                 if (box) {
-                    box.innerHTML = `<h3>${cityName}</h3><p>Weather unavailable</p>`;
+                    box.innerHTML = `<h3>${cityName}</h3><p style="font-size: 14px; color: #ff7675;">Error: ${error.message}</p>`;
                 }
             });
     };

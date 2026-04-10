@@ -1,5 +1,4 @@
-// Global configuration for the Today's Weather app
-// This file provides a fallback for local development without a web server.
+// Global configuration for Today's Weather app
 window.APP_CONFIG = {
-    GNEWS_API_KEY: 'af63dcb1068f00a15e9093d0906e7a2b'
+    WEATHER_API_KEY: 'ff946d71bdab40cea1042151261603'
 };
